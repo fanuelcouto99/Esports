@@ -1,6 +1,6 @@
 # eSports
 
-Aplicação desenvolvida durante a NLW E-Sports
+Aplicação desenvolvida durante a NLW eSports
 
 <h4 align="center"> 
 	🚧  eSports | Em Desenvolvimento 🚀 🚧
