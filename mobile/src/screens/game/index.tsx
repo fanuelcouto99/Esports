@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRoute, useNavigation } from '@react-navigation/native';
-import { FlatList, Image, TouchableOpacity, View } from 'react-native';
+import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
 import { GameParams } from '../../@types/navigation';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Background } from '../../components/background';
@@ -22,7 +22,7 @@ export function Game() {
     };
 
     useEffect(() => {
-        fetch(`http://192.168.100.19:3333/games/${game.id}/ads`)
+        fetch(`http://192.168.100.15:3333/games/${game.id}/ads`)
             .then(response => response.json())
             .then(data => setDuos(data));
     }, []);
@@ -46,7 +46,16 @@ export function Game() {
                 <Heading title={game.title} subtitle="Conecte-se e comece a jogar!" />
                 <FlatList
                     data={duos} keyExtractor={item => item.id} renderItem={({ item }) => (
-                        <DuoCard data={item} />
+                        <DuoCard data={item} onConnect={() => {}}/>
+                    )} 
+                    horizontal 
+                    contentContainerStyle={[duos.length > 0 ? styles.contentList : styles.emptyListContent]} 
+                    showsHorizontalScrollIndicator={false}
+                    style={styles.containerList}
+                    ListEmptyComponent={() => (
+                        <Text style={styles.emptyListText}>
+                            Não há anúncios publicados ainda!
+                        </Text>
                     )}
                 />
             </SafeAreaView>
