@@ -39,8 +39,8 @@ app.post('/games/:gamesId/ads', async (request, response) => {
             yearsPlaying: body.yearsPlaying,
             discord: body.discord,
             weekDays: body.weekDays.join(','),
-            hoursStart: convertHourStringToMinute(body.hoursStart),
-            hoursEnd: convertHourStringToMinute(body.hoursEnd),
+            hoursStart: convertHourStringToMinute(body.hourStart),
+            hoursEnd: convertHourStringToMinute(body.hourEnd),
             useVoiceChannel: body.useVoiceChannel,
         }
     });
