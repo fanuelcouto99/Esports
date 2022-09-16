@@ -23,9 +23,7 @@ export function CreateAdModal() {
         const formData = new FormData(event.target as HTMLFormElement);
         const data = Object.fromEntries(formData);
 
-        if(!data.name) {
-            return;
-        }
+        console.log(data)
 
         try {
             await axios.post(`http://localhost:3333/games/${data.game}/ads`, {
@@ -166,7 +164,7 @@ export function CreateAdModal() {
                             <label htmlFor="hourStart">Qual horário do dia?</label>
                             <div className='grid grid-cols-2 gap-2'>
                                 <Input name="hourStart" id="hourStart" type="time" placeholder="De" />
-                                <Input name="hoursEnd" id="hourEnd" type="time" placeholder="Até" />
+                                <Input name="hourEnd" id="hourEnd" type="time" placeholder="Até" />
                             </div>
                         </div>
                     </div>
