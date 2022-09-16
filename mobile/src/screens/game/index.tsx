@@ -6,6 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Background } from '../../components/background';
 import { Heading } from '../../components/heading';
 import { DuoCard, DuoCardProps } from '../../components/duoCard';
+import { DuoMatch } from '../../components/duoMatch';
 import { styles } from './styles';
 import { THEME } from '../../theme';
 import logoImg from '../../assets/logo-nlw-esports.png';
@@ -58,6 +59,8 @@ export function Game() {
                         </Text>
                     )}
                 />
+
+                <DuoMatch visible={true} discord="fanuel"/>
             </SafeAreaView>
         </Background>
     );
