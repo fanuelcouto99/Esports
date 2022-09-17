@@ -14,6 +14,8 @@ import { Entypo } from '@expo/vector-icons';
 
 export function Game() {
     const [duos, setDuos] = useState<DuoCardProps[]>([]);
+    const [discorDuoSelected, setDiscordDuoSelected] = useState('teste');
+
     const route = useRoute();
     const navigation = useNavigation();
     const game = route.params as GameParams;
@@ -22,8 +24,14 @@ export function Game() {
         navigation.goBack();
     };
 
+    async function getDiscordUser(adsId: string) {
+        fetch(`http://192.168.0.35:3333/ads/${adsId}/discord`)
+            .then(response => response.json())
+            .then(data => { console.log(data) });
+    };
+
     useEffect(() => {
-        fetch(`http://192.168.100.15:3333/games/${game.id}/ads`)
+        fetch(`http://192.168.0.35:3333/games/${game.id}/ads`)
             .then(response => response.json())
             .then(data => setDuos(data));
     }, []);
@@ -47,10 +55,10 @@ export function Game() {
                 <Heading title={game.title} subtitle="Conecte-se e comece a jogar!" />
                 <FlatList
                     data={duos} keyExtractor={item => item.id} renderItem={({ item }) => (
-                        <DuoCard data={item} onConnect={() => {}}/>
-                    )} 
-                    horizontal 
-                    contentContainerStyle={[duos.length > 0 ? styles.contentList : styles.emptyListContent]} 
+                        <DuoCard data={item} onConnect={() => getDiscordUser(item.id)} />
+                    )}
+                    horizontal
+                    contentContainerStyle={[duos.length > 0 ? styles.contentList : styles.emptyListContent]}
                     showsHorizontalScrollIndicator={false}
                     style={styles.containerList}
                     ListEmptyComponent={() => (
@@ -60,7 +68,11 @@ export function Game() {
                     )}
                 />
 
-                <DuoMatch visible={true} discord="fanuel"/>
+                <DuoMatch
+                    visible={discorDuoSelected.length > 0}
+                    discord="fanuel"
+                    onClose={() => setDiscordDuoSelected('')}
+                />
             </SafeAreaView>
         </Background>
     );
