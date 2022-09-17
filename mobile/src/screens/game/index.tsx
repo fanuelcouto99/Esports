@@ -14,7 +14,7 @@ import { Entypo } from '@expo/vector-icons';
 
 export function Game() {
     const [duos, setDuos] = useState<DuoCardProps[]>([]);
-    const [discorDuoSelected, setDiscordDuoSelected] = useState('teste');
+    const [discorDuoSelected, setDiscordDuoSelected] = useState('');
 
     const route = useRoute();
     const navigation = useNavigation();
@@ -27,7 +27,7 @@ export function Game() {
     async function getDiscordUser(adsId: string) {
         fetch(`http://192.168.0.35:3333/ads/${adsId}/discord`)
             .then(response => response.json())
-            .then(data => { console.log(data) });
+            .then(data => setDiscordDuoSelected(data.discord));
     };
 
     useEffect(() => {

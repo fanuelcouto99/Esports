@@ -1,4 +1,5 @@
-import { Modal, ModalProps, Text, View, TouchableOpacity } from 'react-native';
+import { Modal, ModalProps, Text, View, TouchableOpacity, Alert } from 'react-native';
+import * as Clipboard from 'expo-clipboard';
 import { Heading } from '../heading';
 import { styles } from './styles';
 import { THEME } from '../../theme';
@@ -11,8 +12,14 @@ interface Props extends ModalProps {
 }
 
 export function DuoMatch({ discord, onClose, ...rest }: Props) {
+
+    async function handleCopyDiscordToClipboard() {
+        await Clipboard.setStringAsync(discord);
+        Alert.alert('Discord Copiado!', 'Usuário copiado para você colar no Discord e encontrar essa pessoa!');
+    };
+
     return (
-        <Modal {...rest} transparent statusBarTranslucent>
+        <Modal {...rest} transparent statusBarTranslucent animationType='fade'>
             <View style={styles.container}>
                 <View style={styles.content}>
                     <TouchableOpacity style={styles.closeIcon} onPress={onClose}>
